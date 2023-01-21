@@ -24,7 +24,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", ""};
 
 static const Rule rules[] = { 
 	/* xprop(1):
@@ -33,11 +33,11 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Emacs",          NULL,       NULL,       1 << 0,       0,           -1 },
-	{ "st",		    NULL,	NULL,	    1 << 1,	  0,	       -1 },
-	{ "firefox",	    NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "st",             NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Texworks",       NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "firefox",	    NULL,       NULL,       1 << 3,       0,           -1 },
 	{ "mpv",      	    NULL,       NULL,       1 << 4,       0,           -1 },
-	{ "KeePassXC",	    NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "Gimp",	    NULL,       NULL,       1 << 5,       0,           -1 },
+	{ "KeePassXC",	    NULL,       NULL,       1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -66,23 +66,23 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmencmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *clipcmd[] = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *firecmd[] = { "firefox", NULL };
 static const char *keexcmd[] = { "keepassxc", NULL };
-static const char *emacscmd[] = { "emacsclient", "-c", NULL };
-static const char *gimpcmd[] = { "gimp", NULL };
+static const char *firecmd[] = { "firefox", NULL };
+static const char *macscmd[] = { "emacsclient", "-c", NULL };
+static const char *texwcmd[] = { "texworks", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_e,      spawn,          {.v = emacscmd } },
-	{ MODKEY,                       XK_g,      spawn,          {.v = gimpcmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmencmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = texwcmd } },
+	{ MODKEY,			XK_f,      spawn,          {.v = firecmd } },
+	{ MODKEY,			XK_e,      spawn,          {.v = macscmd } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = clipcmd } },
 	{ MODKEY,                       XK_k,      spawn,          {.v = keexcmd } },
-	{ MODKEY,                       XK_f,      spawn,          {.v = firecmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      focusstack,     {.i = +1 } },
