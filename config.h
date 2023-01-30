@@ -70,14 +70,12 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *clipcmd[] = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *keexcmd[] = { "keepassxc", NULL };
 static const char *firecmd[] = { "firefox", NULL };
-static const char *macscmd[] = { "emacsclient", "-c", NULL };
-static const char *texwcmd[] = { "texworks", NULL };
+static const char *macscmd[] = { "emacs", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmencmd } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = texwcmd } },
 	{ MODKEY,			XK_f,      spawn,          {.v = firecmd } },
 	{ MODKEY,			XK_e,      spawn,          {.v = macscmd } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = clipcmd } },
