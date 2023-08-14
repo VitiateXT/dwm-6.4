@@ -6,25 +6,25 @@ static const unsigned int gappx     = 10;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Ubuntu Mono:size=9", "Font Awesome 5 Brands:size=7.5", "Font Awesome 5 Free:size=7.5", "FontAwesome 5 Free Solid:size=7.5", "Font Awesome 5 Free Regular:size=7.5"  };
-static const char dmenufont[]       = "Ubuntu Mono:size=9";
-static const char col_gray1[]       = "#0f0f14"; // background color
-static const char col_gray2[]       = "#0f0f14"; // inactive window border color
-static const char col_gray3[]       = "#8c4351"; // font color
-static const char col_gray4[]       = "#cfc9c2"; // orange, current tag, current window font color
-static const char col_cyan[]        = "#8c4351"; // top bar second color and active window border color
+static const char *fonts[]          = { "Ubuntu Mono:size=11", "Font Awesome 5 Brands:size=9", "Font Awesome 5 Free:size=9", "FontAwesome 5 Free Solid:size=9", "Font Awesome 5 Free Regular:size=9"  };
+static const char dmenufont[]       = "Ubuntu Mono:size=11";
+static const char col_gray1[]       = "#1f1f28"; // background color
+static const char col_gray2[]       = "#000000"; // inactive window border color
+static const char col_gray3[]       = "#c0a36e"; // font color
+static const char col_gray4[]       = "#c34043"; // orange, current tag, current window font color
+static const char col_cyan[]        = "#1f1f28"; // top bar second color and active window border color
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeTagsSel]  = { "#cfc9c2", col_cyan,  "#000000"  }, // yellow  Tagbar left selected {text,background,not used but cannot be empty}
-    [SchemeTagsNorm]  = { "#8c4351", col_gray1,  "#000000"  }, // green Tagbar left unselected {text,background,not used but cannot be empty}
-    [SchemeInfoSel]  = { "#cfc9c2", col_cyan,  "#000000"  }, // yellow infobar middle  selected {text,background,not used but cannot be empty}
-    [SchemeInfoNorm]  = { "#cfc9c2", col_gray1,  "#000000"  }, // green infobar middle  unselected {text,background,not used but cannot be empty}
+	[SchemeTagsSel]  = { "#c34043", col_cyan,  "#000000"  }, // yellow  Tagbar left selected {text,background,not used but cannot be empty}
+    [SchemeTagsNorm]  = { "#c0a36e", col_gray1,  "#000000"  }, // green Tagbar left unselected {text,background,not used but cannot be empty}
+    [SchemeInfoSel]  = { "#c34043", col_cyan,  "#000000"  }, // yellow infobar middle  selected {text,background,not used but cannot be empty}
+    [SchemeInfoNorm]  = { "#c0a36e", col_gray1,  "#000000"  }, // green infobar middle  unselected {text,background,not used but cannot be empty}
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", ""};
+static const char *tags[] = { "", "", "", "", "", "" };
 
 static const Rule rules[] = { 
 	/* xprop(1):
@@ -32,11 +32,12 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Emacs",          NULL,       NULL,       1 << 0,       0,           -1 },
+	{ "libre",          NULL,       NULL,       1 << 0,       0,           -1 },
 	{ "firefox",        NULL,       NULL,       1 << 1,       0,           -1 },
 	{ "st",             NULL,       NULL,       1 << 2,       0,           -1 },
 	{ "mpv",      	    NULL,       NULL,       1 << 3,       0,           -1 },
-	{ "KeePassXC",	    NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "Anki",           NULL,       NULL,       1 << 4,       0,           -1 },
+	{ "KeePassXC",	    NULL,       NULL,       1 << 5,       0,           -1 },
 };
 
 /* layout(s) */
@@ -70,16 +71,18 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *clipcmd[] = { "clipmenu", "-i", "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *keexcmd[] = { "keepassxc", NULL };
 static const char *firecmd[] = { "firefox", NULL };
-static const char *macscmd[] = { "emacs", NULL };
+static const char *ankicmd[] = { "anki", NULL };
+static const char *libwcmd[] = { "libreoffice", "--writer", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmencmd } },
-	{ MODKEY,			XK_f,      spawn,          {.v = firecmd } },
-	{ MODKEY,			XK_e,      spawn,          {.v = macscmd } },
+	{ MODKEY,                       XK_f,      spawn,          {.v = firecmd } },
 	{ MODKEY,                       XK_c,      spawn,          {.v = clipcmd } },
 	{ MODKEY,                       XK_k,      spawn,          {.v = keexcmd } },
+	{ MODKEY,                       XK_a,      spawn,          {.v = ankicmd } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = libwcmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY|ShiftMask,             XK_j,      focusstack,     {.i = +1 } },
